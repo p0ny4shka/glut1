@@ -42,7 +42,7 @@ void reshape(int w, int h)
 
 }
 
-void display(int R, int G, int B) {
+void display() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -174,7 +174,6 @@ void MouseMotion(int x, int y)	//Перемешение мыши
         mx = x;
         my = y;
         //	glutPostRedisplay();	//Перерисовать экран
-        colorChange();
     }
 }
 
@@ -219,7 +218,6 @@ void InitOpenGL(int argc, char* argv[])
     glutInitWindowPosition(200, 200);
     glutCreateWindow("Window");
     glutMouseFunc(Mouse);
-
     glutMotionFunc(MouseMotion);
 
     glutReshapeFunc(reshape);
@@ -233,11 +231,6 @@ void InitOpenGL(int argc, char* argv[])
     glutMainLoop();
 }
 
-
-void colorChange()
-{
-    display(255, 255, 255);
-}
 
 
 int main(int argc, char* argv[])

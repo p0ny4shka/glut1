@@ -52,7 +52,6 @@ void compare(float* coords, int* indexes, int countFase, int countPoint);
 
 void runMainLoop(int); //when frame gets updated, update it 
 
-void colorChange();
 
 void reshape(int, int);
 //resize window with saving perspective
