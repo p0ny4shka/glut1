@@ -16,8 +16,9 @@ void draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);//clear buffer
     glMatrixMode(GL_MODELVIEW);
-    glLineWidth(3);
+    glLineWidth(1);
     for (int i = 0; i < p; i++) {
+        glColor3f(0, 0.5, 0);
         glBegin(GL_LINE_LOOP);
         for (int s = 0; s < 4; s++)
             glVertex3f(models[i].point[s].x, models[i].point[s].y, models[i].point[s].z);
@@ -44,8 +45,6 @@ void reshape(int w, int h)
 
 void display() {
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
     glEnable(GL_COLOR_MATERIAL);
     glColor3f(0.1, 0.7, 0.2);
     glClearColor(0.5, 0.5, 0.75, 1);
