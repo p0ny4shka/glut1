@@ -1,14 +1,28 @@
 #pragma once
 const int SCREEN_FPS = 60;
-GLdouble x_angle = 1;
-GLdouble y_angle = 1;
-GLdouble z_angle = 1;
 
 std::string line;
 std::fstream file;
 float* coords;
 int* index;
 int  coordsIndex = 0, faseIndex = 0; //indices of dots in .obj
+
+struct coord
+{
+	float x;
+	float y;
+	float z;
+};
+
+struct polygons
+{
+	coord* point;
+};
+
+coord* dot; //new structure that stores dot coords
+polygons* models; //new structure thst stores dots coords, to draw lines
+int point = 1; //dots counter
+int p = 0; //coords indeces
 
 
 //glut vars
@@ -31,25 +45,8 @@ mwheelup = false;
 
 
 
-struct coord
-{
-	float x;
-	float y;
-	float z;
-};
+//functions
 
-struct polygons
-{
-	coord* point;
-};
-//new structure that stores dot coords
-coord* dot;
-//new structure thst stores dots coords, to draw lines
-polygons* models;
-int point = 1; //dots counter
-int p = 0; //coords indeces
-
-void menu();
 
 void Keyboard(unsigned char key, int x, int y);
 
@@ -64,5 +61,4 @@ void compare(float* coords, int* indexes, int countFase, int countPoint);
 void runMainLoop(int); //when frame gets updated, update it 
 
 
-void reshape(int, int);
-//resize window with saving perspective
+void reshape(int, int); //resize window with saving perspective

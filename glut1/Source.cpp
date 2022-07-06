@@ -169,7 +169,6 @@ void mouseMotion(int x, int y)
         mx = x;
         my = y;
        	glutPostRedisplay();	//redraw screen
-        std::cout << std::endl<< "x: " << rx << " " << "y: " << ry;
     }
 
 
@@ -247,10 +246,8 @@ void InitOpenGL(int argc, char* argv[])
     glutMotionFunc(mouseMotion);
     glutMouseWheelFunc(mouseWheel);
     glutKeyboardFunc(Keyboard);
-
     glutReshapeFunc(reshape);
     glMatrixMode(GL_PROJECTION);
-  // menu();
    // glLoadIdentity();
 
     glClear(GL_COLOR_MATERIAL);//clears buffer
@@ -276,32 +273,30 @@ void Keyboard(unsigned char key, int x, int y)			//Обработка сообщений от клавиа
         rx = 0;
         ry = 0;
         break;
-    }
-}
-
-void menu()
-{
-    int choice =0;
-    std::cout<< std::endl << "choose color" << std::endl << "1.red" << std::endl << "2.green" << std::endl << "3.Blue" << std::endl;
-    std::cin >> choice;
-    switch (choice)
-    {
-    case (1):
+    case '1':
+        red = 0.6;
+        green = 0;
+        blue = 0;
+        break;
+    case '2':
+        red = 0;
+        green = 0.5;
+        blue = 0;
+        break;
+    case '3':
         red = 1;
-        green = 0;
-        blue = 0;
-        break;
-    case (2):
-        red = 0;
         green = 1;
-        blue = 0;
-        break;
-    case (3):
-        red = 0;
-        green = 0;
         blue = 1;
         break;
-    default:
+    case '4':
+        red = 0;
+        green = 0.5;
+        blue = 0.8;
+        break;
+    case '5':
+        red = 0.8;
+        green = 0.1;
+        blue = 0.4;
         break;
     }
 }
