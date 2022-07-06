@@ -12,19 +12,19 @@
 #include "Header.h"
 
 
-void draw()
+void draw(GLfloat red, GLfloat green, GLfloat blue)
 {
     glClear(GL_COLOR_BUFFER_BIT);//clear buffer
     glMatrixMode(GL_MODELVIEW);
-    glLineWidth(1);
+    glLineWidth(1.3);
     for (int i = 0; i < p; i++) {
-        glColor3f(0, 0.5, 0);
+        glColor3f(0.0, 0.0, 0.0);
         glBegin(GL_LINE_LOOP);
         for (int s = 0; s < 4; s++)
             glVertex3f(models[i].point[s].x, models[i].point[s].y, models[i].point[s].z);
         glEnd();
 
-        glColor3f(0, 1, 0);
+        glColor3f(red, green, blue);
         glBegin(GL_QUADS);
         for (int s = 0; s < 4; s++)
             glVertex3f(models[i].point[s].x, models[i].point[s].y, models[i].point[s].z);
@@ -46,15 +46,14 @@ void reshape(int w, int h)
 void display() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_COLOR_MATERIAL);
-    glColor3f(0.1, 0.7, 0.2);
-    glClearColor(0.5, 0.5, 0.75, 1);
+    glClearColor(0.8, 0.8, 0.8, 0.0);  //background color
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
-    glTranslatef(tx, ty, tz);		//Перемещение и поворт объекта
-    glRotatef(rx, 1, 0, 0);
+    glTranslatef(tx, ty, tz);		//model movement
+    glRotatef(rx, 1, 0, 0); //model rotation
     glRotatef(ry, 0, 1, 0);
-    glScalef(size, size, size);		//Перемещение и поворт объекта
-    draw();			//Вывод объекта на экран
+    glScalef(size, size, size);		//model size change
+    draw(red, green, blue);
     glPopMatrix();
     glutSwapBuffers();
 }
@@ -67,11 +66,8 @@ void update()
 
 void runMainLoop(int val)
 {
-    //Frame logic
     update();
     display();
-
-    //Run frame one more time
     glutTimerFunc(1000 / SCREEN_FPS, runMainLoop, val);
 }
 
@@ -86,9 +82,9 @@ void compare(float* coords, int* indices, int countFase, int countPoint)
 
     for (int i = 0; i < countPoint; i += 3)
     {
-        dot[point].x = coords[i + 0]; //координата Х
-        dot[point].y = coords[i + 1]; //координата Y
-        dot[point].z = coords[i + 2]; //координата Z
+        dot[point].x = coords[i + 0]; //coord Х
+        dot[point].y = coords[i + 1]; //coord Y
+        dot[point].z = coords[i + 2]; //coord Z
         point++;
     }
     p = 0;
@@ -164,21 +160,22 @@ void readFile(const char* fileName)
 
 }
 
-void mouseMotion(int x, int y)	//Перемешение мыши
+void mouseMotion(int x, int y)
 {
-    if (ldown)		// Левая кнопка
+    if (ldown)		// LMB
     {
-        rx += 0.5 * (y - my);	//Изменение угола поворота
+        rx += 0.5 * (y - my);	//angle change
         ry += 0.5 * (x - mx);
         mx = x;
         my = y;
-       	glutPostRedisplay();	//Перерисовать экран
+       	glutPostRedisplay();	//redraw screen
+        std::cout << std::endl<< "x: " << rx << " " << "y: " << ry;
     }
 
 
-    if (rdown)	//Правая
+    if (rdown)	//RMB
     {
-        tx += 0.01 * (x - mx);	//Перемещение вдоль активной плоскости
+        tx += 0.01 * (x - mx);	
         if (tt)
             tz += 0.01 * (y - my);
         else
@@ -206,16 +203,16 @@ void mouseWheel(int wheel, int direction, int x, int y)
         size = 0.4;
 }
 
-void mouse(int button, int state, int x, int y)		//Обработка щелчков мыши
+void mouse(int button, int state, int x, int y)		//Mouse button clicks
 {
 
-    if (button == GLUT_LEFT_BUTTON)		//Левая кнопка
+    if (button == GLUT_LEFT_BUTTON)		//LMB
     {
         switch (state)
         {
-        case GLUT_DOWN:		//Если нажата
-            ldown = true;		//установить флаг
-            mx = x;			//Запомнить координаты
+        case GLUT_DOWN:		
+            ldown = true;		
+            mx = x;			
             my = y;
             break;
         case GLUT_UP:
@@ -223,7 +220,7 @@ void mouse(int button, int state, int x, int y)		//Обработка щелчков мыши
             break;
         }
     }
-    if (button == GLUT_RIGHT_BUTTON)	//Правая кнопка
+    if (button == GLUT_RIGHT_BUTTON)	//RMB
     {
         switch (state)
         {
@@ -249,10 +246,11 @@ void InitOpenGL(int argc, char* argv[])
     glutMouseFunc(mouse);
     glutMotionFunc(mouseMotion);
     glutMouseWheelFunc(mouseWheel);
+    glutKeyboardFunc(Keyboard);
 
     glutReshapeFunc(reshape);
     glMatrixMode(GL_PROJECTION);
-
+  // menu();
    // glLoadIdentity();
 
     glClear(GL_COLOR_MATERIAL);//clears buffer
@@ -261,6 +259,52 @@ void InitOpenGL(int argc, char* argv[])
     glutMainLoop();
 }
 
+void Keyboard(unsigned char key, int x, int y)			//Обработка сообщений от клавиатуры
+{
+    switch (key)
+    {
+    
+    case 'z':		//Если нажата клавиша ESC - выход
+        rx = 90;
+        ry = 0;
+        break;
+    case 'x':		//Если нажата клавиша ESC - выход
+        rx = 0;
+        ry = 90;
+        break;
+    case 'c':		//Если нажата клавиша ESC - выход
+        rx = 0;
+        ry = 0;
+        break;
+    }
+}
+
+void menu()
+{
+    int choice =0;
+    std::cout<< std::endl << "choose color" << std::endl << "1.red" << std::endl << "2.green" << std::endl << "3.Blue" << std::endl;
+    std::cin >> choice;
+    switch (choice)
+    {
+    case (1):
+        red = 1;
+        green = 0;
+        blue = 0;
+        break;
+    case (2):
+        red = 0;
+        green = 1;
+        blue = 0;
+        break;
+    case (3):
+        red = 0;
+        green = 0;
+        blue = 1;
+        break;
+    default:
+        break;
+    }
+}
 
 
 int main(int argc, char* argv[])
