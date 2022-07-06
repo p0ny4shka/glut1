@@ -32,9 +32,9 @@ GLfloat	 tz = 0;			// z
 GLfloat  rx = 0;			// rotation angle x
 GLfloat  ry = 0;			// y
 GLint	 tt = 0;			// active dimention: 0 - XY, 1 - XZ
-GLfloat red = 1;
-GLfloat green = 0;
-GLfloat blue = 0;
+GLfloat red = 0.5;
+GLfloat green = 0.5;
+GLfloat blue = 0.5;
 
 int mx = 0, my = 0;				// mouse coords x;y
 bool ldown = false,		
@@ -47,12 +47,17 @@ mwheelup = false;
 
 //functions
 
+void InitOpenGL(int argc, char* argv[]);
 
 void Keyboard(unsigned char key, int x, int y);
 
 void draw(GLfloat red, GLfloat green, GLfloat blue);
 
 void display();
+
+void mouse(int button, int state, int x, int y);
+
+void mouseWheel(int wheel, int direction, int x, int y);
 
 void readFile(const char* fileName);
 

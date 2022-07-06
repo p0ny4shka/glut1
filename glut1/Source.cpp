@@ -298,6 +298,9 @@ void Keyboard(unsigned char key, int x, int y)			//Обработка сообщений от клавиа
         green = 0.1;
         blue = 0.4;
         break;
+    case VK_ESCAPE:		//Если нажата клавиша ESC - выход
+        exit(0);
+        break;
     }
 }
 
