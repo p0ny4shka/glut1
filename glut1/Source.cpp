@@ -104,6 +104,7 @@ void readFile(const char* fileName)
     if (file.is_open())
     {
         std::cout << "file opened";
+        instruction();
         file.seekg(0, std::ios::end); //sets cursof at the end of the file
         int fileSize = file.tellg(); //sets size of temp array for data
         float* tempCoords = (float*)malloc(fileSize); //temp array for coords
@@ -197,7 +198,7 @@ void mouseWheel(int wheel, int direction, int x, int y)
     if (direction == -1)
         size += 0.2;
     if (direction == 1)
-        size -= 0.2;
+        size -= 0.4;
     if (size < 0.3)
         size = 0.4;
 }
@@ -326,20 +327,20 @@ void instruction()
 {
     std::cout << std::endl;
     std::cout << "To change color, use keyboard numbers : " << std::endl << "1. red" << std::endl << "2. green" << std::endl << "3. white" << std::endl << "4. blue" << std::endl << "5. pink" << std::endl;
-    std::cout << "Press 'F' to fullscreen mode, press 'ESC' or 'F' again to window mode" << std::endl;
+    std::cout << "Press 'F' to fullscreen mode, press 'ESC' or 'F' again to og to window mode" << std::endl;
     std::cout << "Press 'Z' to change projection to Z axis" << std::endl;
     std::cout << "Press 'X' to change projection to X axis" << std::endl;
     std::cout << "Press 'C' to change projection to Y axis" << std::endl;
     std::cout << "Hold 'LMB' to rotate model" << std::endl;
     std::cout << "Hold 'RMB' to move model" << std::endl;
     std::cout << "Scroll to change model size" << std::endl;
+    std::cout << "Press 'ESC' to close window" << std::endl;
 }
 
 
 int main(int argc, char* argv[])
 {
     readFile("cube2.obj");
-    instruction();
     InitOpenGL(argc, argv);
     return 0;
 }
