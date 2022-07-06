@@ -16,7 +16,7 @@ void draw(GLfloat red, GLfloat green, GLfloat blue)
 {
     glClear(GL_COLOR_BUFFER_BIT);//clear buffer
     glMatrixMode(GL_MODELVIEW);
-    glLineWidth(1.3);
+    glLineWidth(1.5);
     for (int i = 0; i < p; i++) {
         glColor3f(0.0, 0.0, 0.0);
         glBegin(GL_LINE_LOOP);
@@ -278,9 +278,9 @@ void Keyboard(unsigned char key, int x, int y)
         ry = 0;
         break;
     case '1':
-        red = 0.6;
-        green = 0;
-        blue = 0;
+        red = 0.5;
+        green = 0.5;
+        blue = 0.5;
         break;
     case '2':
         red = 0;
@@ -326,7 +326,7 @@ void Keyboard(unsigned char key, int x, int y)
 void instruction()
 {
     std::cout << std::endl;
-    std::cout << "To change color, use keyboard numbers : " << std::endl << "1. red" << std::endl << "2. green" << std::endl << "3. white" << std::endl << "4. blue" << std::endl << "5. pink" << std::endl;
+    std::cout << "To change color, use keyboard numbers : " << std::endl << "1. gray" << std::endl << "2. green" << std::endl << "3. white" << std::endl << "4. blue" << std::endl << "5. pink" << std::endl;
     std::cout << "Press 'F' to fullscreen mode, press 'ESC' or 'F' again to og to window mode" << std::endl;
     std::cout << "Press 'Z' to change projection to Z axis" << std::endl;
     std::cout << "Press 'X' to change projection to X axis" << std::endl;
