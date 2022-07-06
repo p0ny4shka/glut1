@@ -311,6 +311,11 @@ void Keyboard(unsigned char key, int x, int y)
             exit(0);
         break;
     case 'f':
+        if (isFullScr == true)
+        {
+            glutReshapeWindow(1280, 720);
+            isFullScr = false;
+        }
         glutFullScreen();
         isFullScr = true;
         break;
@@ -320,7 +325,14 @@ void Keyboard(unsigned char key, int x, int y)
 void instruction()
 {
     std::cout << std::endl;
-    std::cout << "Для смены цвета используйте цифры: "<<std::endl<<"1. Красный"<< std::endl<<"2."<<std::endl<<"3."<< std::endl<<"4."<<std::endl<<"5."<<std::endl;
+    std::cout << "To change color, use keyboard numbers : " << std::endl << "1. red" << std::endl << "2. green" << std::endl << "3. white" << std::endl << "4. blue" << std::endl << "5. pink" << std::endl;
+    std::cout << "Press 'F' to fullscreen mode, press 'ESC' or 'F' again to window mode" << std::endl;
+    std::cout << "Press 'Z' to change projection to Z axis" << std::endl;
+    std::cout << "Press 'X' to change projection to X axis" << std::endl;
+    std::cout << "Press 'C' to change projection to Y axis" << std::endl;
+    std::cout << "Hold 'LMB' to rotate model" << std::endl;
+    std::cout << "Hold 'RMB' to move model" << std::endl;
+    std::cout << "Scroll to change model size" << std::endl;
 }
 
 
