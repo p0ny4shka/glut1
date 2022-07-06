@@ -25,7 +25,7 @@ void draw()
         glEnd();
 
         glColor3f(0, 1, 0);
-        glBegin(GL_TRIANGLES);
+        glBegin(GL_QUADS);
         for (int s = 0; s < 4; s++)
             glVertex3f(models[i].point[s].x, models[i].point[s].y, models[i].point[s].z);
         glEnd();
@@ -164,7 +164,7 @@ void readFile(const char* fileName)
 
 }
 
-void MouseMotion(int x, int y)	//Перемешение мыши
+void mouseMotion(int x, int y)	//Перемешение мыши
 {
     if (ldown)		// Левая кнопка
     {
@@ -172,11 +172,41 @@ void MouseMotion(int x, int y)	//Перемешение мыши
         ry += 0.5 * (x - mx);
         mx = x;
         my = y;
-        //	glutPostRedisplay();	//Перерисовать экран
+       	glutPostRedisplay();	//Перерисовать экран
+    }
+
+
+    if (rdown)	//Правая
+    {
+        tx += 0.01 * (x - mx);	//Перемещение вдоль активной плоскости
+        if (tt)
+            tz += 0.01 * (y - my);
+        else
+            ty += 0.01 * (my - y);
+        mx = x;
+        my = y;
+        if (tx > 0.8)
+            tx = 0.8;
+        if (tx < -0.8)
+            tx = -0.8;
+        if (ty > 0.8)
+            ty = 0.8;
+        if (ty < -0.8)
+            ty = -0.8;
     }
 }
 
-void Mouse(int button, int state, int x, int y)		//Обработка щелчков мыши
+void mouseWheel(int wheel, int direction, int x, int y)
+{
+    if (direction == -1)
+        size += 0.2;
+    if (direction == 1)
+        size -= 0.2;
+    if (size < 0.3)
+        size = 0.4;
+}
+
+void mouse(int button, int state, int x, int y)		//Обработка щелчков мыши
 {
 
     if (button == GLUT_LEFT_BUTTON)		//Левая кнопка
@@ -216,8 +246,9 @@ void InitOpenGL(int argc, char* argv[])
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(200, 200);
     glutCreateWindow("Window");
-    glutMouseFunc(Mouse);
-    glutMotionFunc(MouseMotion);
+    glutMouseFunc(mouse);
+    glutMotionFunc(mouseMotion);
+    glutMouseWheelFunc(mouseWheel);
 
     glutReshapeFunc(reshape);
     glMatrixMode(GL_PROJECTION);

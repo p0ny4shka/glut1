@@ -22,6 +22,8 @@ int mx = 0, my = 0;				// mouse coorde x;y
 bool ldown = false,		// Нажата левая клавиша мыши?
 rdown = false;
 float size = 1;
+bool mwheeldown = false,
+mwheelup = false;
 
 
 struct coord
