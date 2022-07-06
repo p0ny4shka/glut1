@@ -239,37 +239,40 @@ void InitOpenGL(int argc, char* argv[])
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(600, 600);
+    glutInitWindowSize(1280, 720);
     glutInitWindowPosition(200, 200);
     glutCreateWindow("Window");
+   // glutFullScreen();
     glutMouseFunc(mouse);
     glutMotionFunc(mouseMotion);
     glutMouseWheelFunc(mouseWheel);
     glutKeyboardFunc(Keyboard);
     glutReshapeFunc(reshape);
     glMatrixMode(GL_PROJECTION);
+
    // glLoadIdentity();
 
     glClear(GL_COLOR_MATERIAL);//clears buffer
     glutDisplayFunc(display);//render
+
     glutTimerFunc(1000 / SCREEN_FPS, runMainLoop, 0);
     glutMainLoop();
 }
 
-void Keyboard(unsigned char key, int x, int y)			//Обработка сообщений от клавиатуры
+void Keyboard(unsigned char key, int x, int y)			
 {
     switch (key)
     {
     
-    case 'z':		//Если нажата клавиша ESC - выход
+    case 'z':		
         rx = 90;
         ry = 0;
         break;
-    case 'x':		//Если нажата клавиша ESC - выход
+    case 'x':		
         rx = 0;
         ry = 90;
         break;
-    case 'c':		//Если нажата клавиша ESC - выход
+    case 'c':		
         rx = 0;
         ry = 0;
         break;
@@ -298,10 +301,25 @@ void Keyboard(unsigned char key, int x, int y)			//Обработка сообщений от клавиа
         green = 0.1;
         blue = 0.4;
         break;
-    case VK_ESCAPE:		//Если нажата клавиша ESC - выход
+    case VK_ESCAPE:		
+        if (isFullScr == true)
+        {
+            glutReshapeWindow(1280, 720);
+            isFullScr = false;
+        }
+        else
         exit(0);
         break;
-    }
+    case 'f':
+        glutFullScreen();
+        isFullScr = true;
+        break;
+}
+
+void instruction()
+{
+    std::cout << std::endl;
+    std::cout << "Для смены цвета используйте цифры: "<<std::endl<<"1. Красный"<< std::endl<<"2."<<std::endl<<"3."<< std::endl<<"4."<<std::endl<<"5."<<std::endl;
 }
 
 
@@ -310,5 +328,6 @@ int main(int argc, char* argv[])
     readFile("cube2.obj");
 
     InitOpenGL(argc, argv);
+    void instruction();
     return 0;
 }

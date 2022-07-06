@@ -25,6 +25,7 @@ int point = 1; //dots counter
 int p = 0; //coords indeces
 
 
+
 //glut vars
 GLfloat  tx = 0;			// move x
 GLfloat	 ty = 0;			// y
@@ -42,6 +43,7 @@ rdown = false;
 float size = 1;
 bool mwheeldown = false,
 mwheelup = false;
+bool isFullScr = false;
 
 
 
@@ -65,5 +67,6 @@ void compare(float* coords, int* indexes, int countFase, int countPoint);
 
 void runMainLoop(int); //when frame gets updated, update it 
 
+void instruction();
 
 void reshape(int, int); //resize window with saving perspective
