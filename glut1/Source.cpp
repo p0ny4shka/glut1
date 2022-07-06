@@ -259,20 +259,20 @@ void InitOpenGL(int argc, char* argv[])
     glutMainLoop();
 }
 
-void Keyboard(unsigned char key, int x, int y)			
+void Keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    
-    case 'z':		
+
+    case 'z':
         rx = 90;
         ry = 0;
         break;
-    case 'x':		
+    case 'x':
         rx = 0;
         ry = 90;
         break;
-    case 'c':		
+    case 'c':
         rx = 0;
         ry = 0;
         break;
@@ -301,19 +301,20 @@ void Keyboard(unsigned char key, int x, int y)
         green = 0.1;
         blue = 0.4;
         break;
-    case VK_ESCAPE:		
+    case VK_ESCAPE:
         if (isFullScr == true)
         {
             glutReshapeWindow(1280, 720);
             isFullScr = false;
         }
         else
-        exit(0);
+            exit(0);
         break;
     case 'f':
         glutFullScreen();
         isFullScr = true;
         break;
+    }
 }
 
 void instruction()
@@ -326,8 +327,7 @@ void instruction()
 int main(int argc, char* argv[])
 {
     readFile("cube2.obj");
-
+    instruction();
     InitOpenGL(argc, argv);
-    void instruction();
     return 0;
 }
