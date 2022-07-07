@@ -196,9 +196,9 @@ void mouseMotion(int x, int y)
 void mouseWheel(int wheel, int direction, int x, int y)
 {
     if (direction == -1)
-        size += 0.2;
-    if (direction == 1)
         size -= 0.4;
+    if (direction == 1)
+        size += 0.4;
     if (size < 0.3)
         size = 0.4;
 }
@@ -327,7 +327,7 @@ void instruction()
 {
     std::cout << std::endl;
     std::cout << "To change color, use keyboard numbers : " << std::endl << "1. gray" << std::endl << "2. green" << std::endl << "3. white" << std::endl << "4. blue" << std::endl << "5. pink" << std::endl;
-    std::cout << "Press 'F' to fullscreen mode, press 'ESC' or 'F' again to og to window mode" << std::endl;
+    std::cout << "Press 'F' to fullscreen mode, press 'ESC' or 'F' again to go to window mode" << std::endl;
     std::cout << "Press 'Z' to change projection to Z axis" << std::endl;
     std::cout << "Press 'X' to change projection to X axis" << std::endl;
     std::cout << "Press 'C' to change projection to Y axis" << std::endl;
